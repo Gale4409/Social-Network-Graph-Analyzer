@@ -10,6 +10,7 @@ This project was built to demonstrate proficiency in raw memory management, opaq
 - **Graph Representation:** Uses an Adjacency List to efficiently handle large, sparse networks without wasting RAM.
 - **Influencer Detection:** Calculates the maximum in-degree node efficiently.
 - **Degrees of Separation:** Uses Breadth-First Search (BFS) to find the shortest path between any two users in the network.
+- **Advanced Algorithms:** Features a custom Recommendation Engine (Triadic Closure) and Tarjan's Algorithm for finding Strongly Connected Components (Community Detection).
 
 ## 🛠️ Technical Implementation
 - **Language:** C99
