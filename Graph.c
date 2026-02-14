@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+
 typedef struct node *link;
 
 struct node {
@@ -105,6 +107,113 @@ void GRAPHfind_path (G graph, int start, int stop) {
     printf ("\nThe minimum distance from %d to %d is %d\n", start, stop, dist[stop]);
     Qfree(q);
     free(dist);
+}
+
+void GRAPHrecommend_friends(G graph, int user) {
+    if (graph == NULL || user < 0 || user >= graph->V) return;
+
+    int *common_friends = calloc(graph->V, sizeof(int));
+    int *already_following = calloc(graph->V, sizeof(int));
+    if (common_friends == NULL || already_following == NULL) return;
+
+    link x;
+    for (x = graph->ladj[user]; x != NULL; x = x->next) {
+        already_following[x->v] = 1;
+    }
+    already_following[user] = 1;
+
+    for (x = graph->ladj[user]; x != NULL; x = x->next) {
+        int friend = x->v;
+        link y;
+        for (y = graph->ladj[friend]; y != NULL; y = y->next) {
+            int fof = y->v; // fof = Friend of Friend
+            if (!already_following[fof]) {
+                common_friends[fof]++;
+            }
+        }
+    }
+
+    int best_recommendation = -1;
+    int max_common = 0;
+    int i;
+    for (i = 0; i < graph->V; i++) {
+        if (common_friends[i] > max_common) {
+            max_common = common_friends[i];
+            best_recommendation = i;
+        }
+    }
+
+    if (best_recommendation != -1) {
+        printf(" -> We recommend user %d to user %d (%d mutual connections)\n", best_recommendation, user, max_common);
+    } else {
+        printf(" -> No new recommendations for user %d at the moment.\n", user);
+    }
+
+    free(common_friends);
+    free(already_following);
+}
+
+static void SCCdfs(G graph, int w, int *pre, int *low, int *stack, int *top, int *onStack, int *time, int *scc_count) {
+    pre[w] = (*time)++;
+    low[w] = pre[w];
+    stack[++(*top)] = w;
+    onStack[w] = 1;
+
+    link x;
+    for (x = graph->ladj[w]; x != NULL; x = x->next) {
+        int v = x->v;
+        if (pre[v] == -1) {
+            SCCdfs(graph, v, pre, low, stack, top, onStack, time, scc_count);
+            low[w] = MIN(low[w], low[v]);
+        } else if (onStack[v]) {
+            low[w] = MIN(low[w], pre[v]);
+        }
+    }
+
+    if (low[w] == pre[w]) {
+        (*scc_count)++;
+        printf(" -> Community %d: [ ", *scc_count);
+        int v;
+        do {
+            v = stack[(*top)--]; // Pop dallo stack
+            onStack[v] = 0;
+            printf("%d ", v);
+        } while (v != w);
+        printf("]\n");
+    }
+}
+
+void GRAPHfind_SCCs(G graph) {
+    if (graph == NULL) return;
+
+    int V = graph->V;
+    int *pre = malloc(V * sizeof(int));
+    int *low = malloc(V * sizeof(int));
+    int *stack = malloc(V * sizeof(int));
+    int *onStack = calloc(V, sizeof(int));
+
+    if (!pre || !low || !stack || !onStack) return;
+
+    int i;
+    for (i = 0; i < V; i++) {
+        pre[i] = -1;
+        low[i] = -1;
+    }
+
+    int top = -1;
+    int time = 0;
+    int scc_count = 0;
+
+    for (i = 0; i < V; i++) {
+        if (pre[i] == -1) {
+            SCCdfs(graph, i, pre, low, stack, &top, onStack, &time, &scc_count);
+        }
+    }
+
+    free(pre);
+    free(low);
+    free(stack);
+    free(onStack);
 }
 
 void GRAPHfree (G graph) {

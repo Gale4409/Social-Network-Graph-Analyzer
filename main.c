@@ -27,10 +27,24 @@ int main(int argc, char *argv[]) {
     GRAPHmost_followed_influencer(myGraph);
 
     printf("\n--- DEGREES OF SEPARATION (BFS) ---");
-    GRAPHfind_path(myGraph, 0, 4); // Percorso: 0 -> 2 -> 3 -> 4 (Distanza: 3)
-    GRAPHfind_path(myGraph, 6, 5); // Percorso: 6 -> 2 -> 3 -> 4 -> 5 (Distanza: 4)
-    GRAPHfind_path(myGraph, 1, 0); // Percorso: 1 -> 5 -> 0 (Distanza: 2)
-    GRAPHfind_path(myGraph, 4, 6); // Ritornerà che non c'è percorso (il 6 non ha frecce in entrata)
+    GRAPHfind_path(myGraph, 0, 4);
+    GRAPHfind_path(myGraph, 6, 5);
+    GRAPHfind_path(myGraph, 1, 0);
+    GRAPHfind_path(myGraph, 4, 6);
+
+    printf("\n--- INFLUENCER ANALYSIS ---\n");
+    GRAPHmost_followed_influencer(myGraph);
+
+    printf("\n--- DEGREES OF SEPARATION (BFS) ---\n");
+    GRAPHfind_path(myGraph, 0, 4);
+    GRAPHfind_path(myGraph, 1, 0);
+
+    printf("\n--- RECOMMENDATION ENGINE ---\n");
+    GRAPHrecommend_friends(myGraph, 0); // Cerchiamo amici da suggerire all'utente 0
+    GRAPHrecommend_friends(myGraph, 6); // Cerchiamo amici da suggerire all'utente 6
+
+    printf("\n--- COMMUNITY DETECTION (Tarjan's SCC) ---\n");
+    GRAPHfind_SCCs(myGraph);
 
     GRAPHfree(myGraph);
     printf("\nMemory freed. Program completed successfully.\n");
