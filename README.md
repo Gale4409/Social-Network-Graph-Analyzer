@@ -292,9 +292,3 @@ MIT License - feel free to use for learning and research.
 Computer Engineering Student @ Politecnico di Torino  
 - GitHub: [@Gale4409](https://github.com/Gale4409)
 - Email: gabri.mauro@studenti.polito.it
-
----
-
-## 🙏 Acknowledgments
-
-Built as part of coursework in Algorithms & Data Structures (03AAXOA) at Politecnico di Torino, 2025/2026.
