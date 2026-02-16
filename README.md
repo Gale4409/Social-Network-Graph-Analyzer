@@ -193,7 +193,8 @@ valgrind --leak-check=full ./social_analyzer input.txt
 ```
 **Result:** 0 bytes lost (guaranteed).
 txt
-```
+
+---
 
 ## 📈 Performance & Benchmarking
 
