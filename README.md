@@ -280,18 +280,6 @@ Potential extensions for research/learning:
 
 ---
 
-## 📚 References
-
-**Algorithms:**
-- Tarjan, R. (1972). "Depth-first search and linear graph algorithms." SIAM Journal on Computing.
-- Cormen, T. et al. "Introduction to Algorithms" (4th ed.), Chapter 22: Elementary Graph Algorithms.
-
-**Social Network Theory:**
-- Granovetter, M. (1973). "The Strength of Weak Ties." American Journal of Sociology.
-- Easley, D. & Kleinberg, J. "Networks, Crowds, and Markets" (2010), Chapter 3: Strong and Weak Ties.
-
----
-
 ## 📝 License
 
 MIT License - feel free to use for learning and research.
