@@ -188,31 +188,6 @@ valgrind --leak-check=full ./social_analyzer input.txt
 
 ---
 
-## 🧪 Example Input Files
-
-### Small Network (4 users)
-```
-Alice Bob
-Alice Charlie
-Bob Charlie
-Charlie David
-David Bob
-```
-
-### Medium Network (8 users)
-```
-A B
-A C
-B D
-C D
-D E
-E F
-F D
-G H
-```
-
----
-
 ## 📈 Performance & Benchmarking
 
 The analyzer was stress-tested using a massive graph structure containing **10,000 vertices** and **50,000 edges**. 
