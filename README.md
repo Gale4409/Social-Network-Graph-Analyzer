@@ -291,7 +291,7 @@ MIT License - feel free to use for learning and research.
 **Gabriele Mauro**  
 Computer Engineering Student @ Politecnico di Torino  
 - GitHub: [@Gale4409](https://github.com/Gale4409)
-- Email: gabriele.mauro@studenti.polito.it
+- Email: gabri.mauro@studenti.polito.it
 
 ---
 
