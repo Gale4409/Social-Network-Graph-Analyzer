@@ -158,6 +158,13 @@ Abstract Data Types (ADTs) with opaque pointers to enforce encapsulation. Client
 
 ## 💻 Building & Running
 
+### Clone the Repository
+First, clone the repository to your local machine and navigate into the project directory:
+```bash
+git clone https://github.com/Gale4409/Social-Network-Graph-Analyzer.git
+cd Social-Network-Graph-Analyzer
+```
+
 ### Prerequisites
 - GCC or Clang compiler
 - CMake (optional, for build automation)
@@ -185,8 +192,8 @@ make
 valgrind --leak-check=full ./social_analyzer input.txt
 ```
 **Result:** 0 bytes lost (guaranteed).
-
----
+txt
+```
 
 ## 📈 Performance & Benchmarking
 
