@@ -213,17 +213,28 @@ G H
 
 ---
 
-## 📈 Performance
+## 📈 Performance & Benchmarking
 
-Tested on graphs up to 10,000 vertices and 50,000 edges:
+The analyzer was stress-tested using a massive graph structure containing **10,000 vertices** and **50,000 edges**. 
 
-| Graph Size | Vertices | Edges | Tarjan (ms) | BFS (ms) | Memory (MB) |
-|------------|----------|-------|-------------|----------|-------------|
-| Small      | 100      | 500   | < 1         | < 1      | 0.2         |
-| Medium     | 1,000    | 5,000 | 5           | 3        | 2.1         |
-| Large      | 10,000   | 50,000| 120         | 80       | 18.5        |
+| Algorithm | Complexity | Execution Time (10k Nodes / 50k Edges) |
+|-----------|------------|----------------------------------------|
+| **Tarjan (SCC)** | O(V + E) | ~2644.00 ms | - due to print inefficiency*
+| **BFS (Shortest Path)**| O(V + E) | ~5.20 ms *(avg per query)* |
+| **Triadic Closure** | O(V + E) | ~2.67 ms *(avg per user)* |
+| **Max In-Degree** | O(V) | ~2.00 ms |
 
-**Note:** Times measured on Intel i7-9750H @ 2.60GHz.
+*Hardware: Intel Core i5-9400F*
+
+### 🔬 Testing Methodology: Defeating the "Giant Component"
+
+Benchmarking Strongly Connected Components (SCCs) requires carefully structured data. In purely random directed graphs, adding enough edges to ensure a healthy density inevitably triggers a mathematical phase transition known as the **"Giant Component" phenomenon**. The random graph collapses into a single, massive SCC containing ~99% of the nodes, leaving only a few isolated outliers.
+
+Evaluating an algorithm against a single giant SCC does not prove its efficiency in handling multiple, distinct community structures.
+
+To properly stress-test Tarjan's algorithm and simulate a realistic social network with multiple echo-chambers, this tool was benchmarked against a **custom-sourced, engineered dataset** acting as a Directed Acyclic Graph (DAG) of dense subgraphs. 
+
+This specific topology enforces strict community boundaries, resulting in exactly **100 perfectly balanced communities** (100 users each). This prevents the giant component collapse and ensures the algorithm correctly recurses, backtracks, and isolates multiple complex structures without stack overflowing.
 
 ---
 
